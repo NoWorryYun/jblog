@@ -12,6 +12,7 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	//회원가입
 	public int join(UserVo userVo) {
 		
 		int count = userDao.join(userVo);
@@ -19,5 +20,9 @@ public class UserService {
 		return count;
 	}
 	
-
+	//로그인
+	public UserVo login(UserVo userVo) {
+		
+		return userDao.login(userVo);
+	}
 }

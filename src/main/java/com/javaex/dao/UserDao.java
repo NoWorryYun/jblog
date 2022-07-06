@@ -12,6 +12,8 @@ public class UserDao {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	
+	//회원가입
 	public int join(UserVo userVo) {
 		
 		int count = sqlsession.insert("users.join", userVo);
@@ -19,4 +21,9 @@ public class UserDao {
 		return count;
 	}
 	
+	//로그인
+	public UserVo login(UserVo userVo) {
+		
+		return sqlsession.selectOne("users.login", userVo);
+	}
 }
