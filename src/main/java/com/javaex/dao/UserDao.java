@@ -26,4 +26,11 @@ public class UserDao {
 		
 		return sqlsession.selectOne("users.login", userVo);
 	}
+	
+	//중복체크
+	public String idCheck(String id) {
+		
+		return sqlsession.selectOne("users.idCheck", id);
+	}
+	
 }

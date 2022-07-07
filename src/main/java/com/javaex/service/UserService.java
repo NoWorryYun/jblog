@@ -25,4 +25,23 @@ public class UserService {
 		
 		return userDao.login(userVo);
 	}
+	
+	//중복체크
+	public String idCheck(String id) {
+		
+		String idCheck = userDao.idCheck(id);
+		System.out.println(idCheck);
+		
+		String result;
+		
+		if(idCheck != null) {
+			result = "fail";
+		} else {
+			result = "success";
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
 }

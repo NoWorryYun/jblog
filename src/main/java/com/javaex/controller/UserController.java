@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -52,6 +54,8 @@ public class UserController {
 		
 		UserVo authUser = userService.login(userVo);
 		
+		System.out.println(authUser);
+		
 		if(authUser != null) {
 			
 			httpsession.setAttribute("authUser", authUser);
@@ -63,6 +67,28 @@ public class UserController {
 			return "redirect:loginForm?result=fail";
 		}
 		
+	}
+	
+	//로그아웃
+	@RequestMapping(value="user/logout", method = {RequestMethod.GET, RequestMethod.POST})
+	public String logout(HttpSession httpsession) {
+		
+		httpsession.removeAttribute("authUser");
+		
+		return "redirect:../";
+		
+	}
+	
+	//아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value="user/idCheck", method = {RequestMethod.GET, RequestMethod.POST})
+	public String idCheck(@RequestBody String id) {
+		
+		System.out.println(id);
+		
+		String result = userService.idCheck(id);
+		
+		return result;
 	}
 	
 }

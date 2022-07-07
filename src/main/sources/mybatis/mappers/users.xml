@@ -23,10 +23,20 @@
 	<select id="login" parameterType="UserVo" resultType="UserVo">
 		<![CDATA[
 			select  id,
+					userName,
 					password
 			from users
 			where id = #{id}
 			and password = #{password}
+		]]>
+	</select>
+	
+	<!-- ID 체크 -->
+	<select id="idCheck" parameterType="String" resultType="String">
+		<![CDATA[
+			select  id
+			from users
+			where id = #{id}
 		]]>
 	</select>
 </mapper>
