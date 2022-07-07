@@ -8,7 +8,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.authUser!= null}">
 			<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/${authUser.id}" target="_blank">내블로그</a></li>
+			<li><a href="${pageContext.request.contextPath}/${authUser.id}" target="_blank">내블로그</a></li>
 		</c:when>
 		<c:otherwise>
 			<li><a href="${pageContext.request.contextPath}/user/loginForm">로그인</a></li>

@@ -64,16 +64,15 @@
 				<!-- //post -->
 				
 				<!-- 글이 없는 경우 -->
-				<!-- 
+				<c:if test="">
 				<div id="postBox" class="clearfix">
 							<div id="postTitle" class="text-left"><strong>등록된 글이 없습니다.</strong></div>
 							<div id="postDate" class="text-left"><strong></strong></div>
 							<div id="postNick"></div>
 				</div>
-			    
+			    </c:if>
 				<div id="post" >
 				</div>
-				-->
 				
 				<div id="list">
 					<div id="listTitle" class="text-left"><strong>카테고리의 글</strong></div>

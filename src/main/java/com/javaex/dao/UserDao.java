@@ -33,4 +33,10 @@ public class UserDao {
 		return sqlsession.selectOne("users.idCheck", id);
 	}
 	
+	//블로그생성
+	public int createBlog(UserVo userVo) {
+		
+		return sqlsession.insert("users.createBlog",userVo);
+	}
+	
 }

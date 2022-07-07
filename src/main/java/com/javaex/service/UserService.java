@@ -20,6 +20,7 @@ public class UserService {
 		int count = 0 ;
 		if(idCheck == null) {
 			count = userDao.join(userVo);
+			userDao.createBlog(userVo);
 			return count;
 		} else {
 			return count;

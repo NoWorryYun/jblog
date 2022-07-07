@@ -39,4 +39,12 @@
 			where id = #{id}
 		]]>
 	</select>
+	
+	<!-- 블로그생성 -->
+	<insert id="createBlog" parameterType="userVo">
+		<![CDATA[
+			insert into blog
+			values(#{id}, #{userName}, null)
+		]]>
+	</insert>
 </mapper>
