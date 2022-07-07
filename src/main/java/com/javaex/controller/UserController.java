@@ -33,9 +33,13 @@ public class UserController {
 
 		System.out.println("Controller > join");
 		
-		userService.join(userVo);
+		int count = userService.join(userVo);
 		
+		if (count > 0) {
 		return "user/joinSuccess";
+		} else {
+			return "user/joinForm";
+		}
 	}
 	
 	//로그인폼

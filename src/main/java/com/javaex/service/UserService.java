@@ -14,10 +14,17 @@ public class UserService {
 	
 	//회원가입
 	public int join(UserVo userVo) {
+		String id = userVo.getId();
 		
-		int count = userDao.join(userVo);
+		String idCheck = userDao.idCheck(id);
+		int count = 0 ;
+		if(idCheck == null) {
+			count = userDao.join(userVo);
+			return count;
+		} else {
+			return count;
+		}
 		
-		return count;
 	}
 	
 	//로그인
