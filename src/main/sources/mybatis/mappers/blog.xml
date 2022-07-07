@@ -12,7 +12,7 @@
 		<result column="postContent" property="postContent" />
 		<result column="regDate" property="regDate" />
 	</resultMap>
-
+	<!-- 보류 -->
 	<select id="blogData" parameterType="String" resultType="BlogVo">
 		<![CDATA[
 			select  u.id id,
@@ -24,10 +24,24 @@
 			        p.regDate regDate
 			from users u, blog b, category c, post p
 			where u.id = b.id
-			and b.id = c.id(+)
-			and c.cateNo = p.cateNo(+)
+			and b.id = c.id
+			and c.cateNo = p.cateNo
 			and u.id = #{id}
 		]]>
 	</select>
 	
+	<!-- 블로그 타이틀 -->
+	<select id="blogTitle" parameterType="String" resultType="BlogVo">
+		<![CDATA[
+			select  b.id id,
+					b.blogTitle blogtitle,
+					b.logoFile logoFile,
+					u.userName userName
+			from blog b, users u
+			where b.id = u.id
+			and b.id = #{id}
+		]]>
+		</select>
+		
+		
 </mapper>

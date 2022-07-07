@@ -27,20 +27,16 @@
 					<!-- 사용자업로드 이미지 -->
 					<%-- <img id="proImg" src=""> --%>
 					
-					<div id="nick">정우성(hijava)님</div>
+					<div id="nick">${bMap.blogTitle.userName}(${bMap.blogTitle.id})님</div>
 				</div>
 				<div id="cate">
 					<div class="text-left">
 						<strong>카테고리</strong>
 					</div>
 					<ul id="cateList" class="text-left">
-						<li><a href="$}">카테고리5</a></li>
-						<li><a href="$}">카테고리4</a></li>
-						<li><a href="$}">카테고리3</a></li>
-						<li><a href="$}">카테고리2</a></li>
-						<li><a href="$}">카테고리1</a></li>
-						<li><a href="$}">미분류</a></li>
-						
+					<c:forEach items="${bMap.cateList}" var="CategoryVo">
+						<li><a href="">${CategoryVo.cateName}</a></li>
+					</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -64,13 +60,11 @@
 				<!-- //post -->
 				
 				<!-- 글이 없는 경우 -->
-				<c:if test="">
 				<div id="postBox" class="clearfix">
 							<div id="postTitle" class="text-left"><strong>등록된 글이 없습니다.</strong></div>
 							<div id="postDate" class="text-left"><strong></strong></div>
 							<div id="postNick"></div>
 				</div>
-			    </c:if>
 				<div id="post" >
 				</div>
 				

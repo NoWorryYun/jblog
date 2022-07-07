@@ -1,6 +1,6 @@
 package com.javaex.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.BlogService;
-import com.javaex.vo.BlogVo;
 
 @Controller
 public class BlogController {
@@ -23,11 +22,11 @@ public class BlogController {
 		System.out.println("BlogController > blogMain");
 		System.out.println(id);
 		
-		List<BlogVo> BDList = blogService.blogData(id);
-		System.out.println(BDList);
+		Map<String, Object> bMap = blogService.blogAllData(id);
 		
+		System.out.println(bMap);
 		
-		model.addAttribute("BDList",BDList);
+		model.addAttribute("bMap",bMap);
 		
 		return "blog/blog-main";
 	}

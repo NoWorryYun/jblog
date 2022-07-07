@@ -15,7 +15,7 @@
 	<insert id="join" parameterType="UserVo">
 		<![CDATA[
 			insert into users
-			values(seq_users_no.nextval, #{userName}, #{id}, #{password}, sysdate)
+			values(seq_users_no.nextval, #{id}, #{userName}, #{password}, sysdate)
 		]]>
 	</insert>
 
@@ -45,6 +45,23 @@
 		<![CDATA[
 			insert into blog
 			values(#{id}, #{userName}, null)
+		]]>
+	</insert>
+	
+	<!-- 블로그명default 값으로 변경 -->
+	<update id="defaultBlogTitle" parameterType="userVo">
+		<![CDATA[
+			update blog
+			set blogTitle = #{userName} || '의 블로그입니다.'
+			where id = #{id}
+		]]>
+	</update>
+	
+	<!-- 카테고리생성 -->
+	<insert id="createCategory" parameterType="userVo">
+		<![CDATA[
+			insert into category
+			values(seq_category_no.nextval, #{id}, '미분류', null, sysdate)
 		]]>
 	</insert>
 </mapper>

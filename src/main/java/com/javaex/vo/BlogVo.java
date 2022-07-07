@@ -2,7 +2,7 @@ package com.javaex.vo;
 
 public class BlogVo {
 
-	//일반
+	// 일반
 	private String id;
 	private String blogTitle;
 	private String logoFile;
@@ -10,13 +10,13 @@ public class BlogVo {
 	private String postTitle;
 	private String postContent;
 	private String regDate;
-	
-	
-	//생성자
+	private String userName;
+
+	// 생성자
 	public BlogVo() {
 		super();
 	}
-	
+
 	public BlogVo(String id, String blogTitle, String logoFile, String cateName, String postTitle, String postContent,
 			String regDate) {
 		super();
@@ -29,8 +29,20 @@ public class BlogVo {
 		this.regDate = regDate;
 	}
 
-	
-	//GS
+	public BlogVo(String id, String blogTitle, String logoFile, String cateName, String postTitle, String postContent,
+			String regDate, String userName) {
+		super();
+		this.id = id;
+		this.blogTitle = blogTitle;
+		this.logoFile = logoFile;
+		this.cateName = cateName;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.regDate = regDate;
+		this.userName = userName;
+	}
+
+	// GS
 	public String getId() {
 		return id;
 	}
@@ -87,16 +99,19 @@ public class BlogVo {
 		this.regDate = regDate;
 	}
 
-	
-	
-	//일반
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	// 일반
 	@Override
 	public String toString() {
 		return "BlogVo [id=" + id + ", blogTitle=" + blogTitle + ", logoFile=" + logoFile + ", cateName=" + cateName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + "]";
 	}
 
-
-	
-	
 }

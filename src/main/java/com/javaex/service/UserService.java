@@ -21,6 +21,8 @@ public class UserService {
 		if(idCheck == null) {
 			count = userDao.join(userVo);
 			userDao.createBlog(userVo);
+			userDao.defaultBlogTitle(userVo);
+			userDao.createCategory(userVo);
 			return count;
 		} else {
 			return count;

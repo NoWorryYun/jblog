@@ -20,6 +20,24 @@ public class UserDao {
 		
 		return count;
 	}
+
+	//블로그생성
+	public int createBlog(UserVo userVo) {
+		
+		return sqlsession.insert("users.createBlog",userVo);
+	}
+
+	//블로그명 default값으로 변경
+	public int defaultBlogTitle(UserVo userVo) {
+		
+		return sqlsession.update("users.defaultBlogTitle", userVo);
+	}
+	
+	//카테고리생성
+	public int createCategory(UserVo userVo) {
+		
+		return sqlsession.insert("users.createCategory", userVo);
+	}
 	
 	//로그인
 	public UserVo login(UserVo userVo) {
@@ -33,10 +51,5 @@ public class UserDao {
 		return sqlsession.selectOne("users.idCheck", id);
 	}
 	
-	//블로그생성
-	public int createBlog(UserVo userVo) {
-		
-		return sqlsession.insert("users.createBlog",userVo);
-	}
 	
 }

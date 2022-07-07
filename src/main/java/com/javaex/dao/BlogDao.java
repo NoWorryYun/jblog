@@ -14,11 +14,18 @@ public class BlogDao {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
+	//메인페이지 full contents(보류)
 	public List<BlogVo> blogData(String id){
 		
 		System.out.println(id);
 		
 		return sqlsession.selectList("blog.blogData", id);
 	}
+	
+	//blogTitle 받기
+	public BlogVo blogTitle(String id) {
+		
+		return sqlsession.selectOne("blog.blogTitle", id);
+	}
+	
 }
