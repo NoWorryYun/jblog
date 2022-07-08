@@ -23,4 +23,10 @@
 		]]>
 	</select>
 	
+	<insert id="addCate" parameterType="CategoryVo">
+		<![CDATA[
+			insert into category
+			values(seq_category_no.nextval, #{id}, #{cateName}, #{description}, sysdate)
+		]]>
+	</insert>
 </mapper>

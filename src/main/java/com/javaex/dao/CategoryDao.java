@@ -21,4 +21,9 @@ public class CategoryDao {
 		return sqlsession.selectList("category.cateList", id);
 	}
 	
+	//category 추가
+	public int addCate(CategoryVo categoryVo) {
+		
+		return sqlsession.insert("category.addCate", categoryVo);
+	}
 }

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<div id="header" class="clearfix">
-			<h1><a href="">${bMap.blogTitle.blogTitle}</a></h1>
+			<h1><a href="${pageContext.request.contextPath }/${bMap.blogTitle.id}">${bMap.blogTitle.blogTitle}</a></h1>
 			<ul class="clearfix">
 				<!-- 자신의 블로그일때만 관리 메뉴가 보인다. -->
 				<c:if test="${authUser.id == bMap.blogTitle.id}">

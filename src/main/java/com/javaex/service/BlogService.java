@@ -80,8 +80,6 @@ public class BlogService {
 		BlogVo blogVo = new BlogVo(id, blogTitle, logoFile);
 		
 		
-		System.out.println("sv" + blogVo);
-		
 		//DB에 저장
 		blogDao.blogImg(blogVo);
 		
@@ -100,5 +98,4 @@ public class BlogService {
 		
 		return logoFile;
 	}
-	
 }

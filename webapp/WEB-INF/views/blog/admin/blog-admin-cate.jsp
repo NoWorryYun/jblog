@@ -95,12 +95,48 @@
 		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"></c:import>
 		<!-- 개인블로그 푸터 -->
 		
-	
+	<input type="hidden" name="authUserId" value="${authUser.id}">
 	
 	</div>
 	<!-- //wrap -->
 </body>
 
+<script type="text/javascript">
+	$("#btnAddCate").on("click", function(){
+		
+		
+		var cateName = $("#admin-cate-add [name = 'name']").val();
+		var description = $("#admin-cate-add [name = 'desc']").val();
+		var id = $("[name = 'authUserId']").val();
+		
+		var categoryVo = {
+				id : id
+				cateName : cateName
+				description : description
+		}
+		
+		$.ajax({
+
+			url : "${pageContext.request.contextPath }/"id"/admin.basic/updateCate",
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(categoryVo),
+
+			dataType : "json",
+			success : function(result) {
+				/*성공시 처리해야될 코드 작성*/
+				if(result =="success"){
+					
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	})
+	
+
+</script>
 
 
 

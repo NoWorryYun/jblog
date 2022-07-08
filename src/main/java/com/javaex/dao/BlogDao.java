@@ -31,8 +31,6 @@ public class BlogDao {
 	//blogLogo 업데이트
 	public int blogImg(BlogVo blogVo) {
 	
-		System.out.println("dao" + blogVo);
-		
 		return sqlsession.update("blog.blogImg", blogVo);
 	}
 	

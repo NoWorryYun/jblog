@@ -26,7 +26,7 @@
 			<!-- //admin-menu -->
 
 			<div id="admin-content">
-				<form action="${pageContext.request.contextPath}/${blogTitle.id}/admin/basic/update" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/${bMap.blogTitle.id}/admin/basic/update" method="post" enctype="multipart/form-data">
 					<table id="admin-basic">
 						<colgroup>
 							<col style="width: 100px;">
@@ -34,13 +34,13 @@
 						</colgroup>
 						<tr>
 							<td><label for="textTitle">블로그 제목</label></td>
-							<td><input id="textTitle" type="text" name="blogTitle" value="${blogTitle.blogTitle}"></td>
+							<td><input id="textTitle" type="text" name="blogTitle" value="${bMap.blogTitle.blogTitle}"></td>
 						</tr>
 						<tr>
 							<td><label>로고이미지</label></td>
 							<c:choose>
-								<c:when test="${blogTitle.logoFile != null}">
-									<td class="text-left"><img src="${pageContext.request.contextPath}/upload/${blogTitle.logoFile}"></td>
+								<c:when test="${bMap.blogTitle.logoFile != null}">
+									<td class="text-left"><img src="${pageContext.request.contextPath}/upload/${bMap.blogTitle.logoFile}"></td>
 								</c:when>
 								<c:otherwise>
 									<td class="text-left"><img
