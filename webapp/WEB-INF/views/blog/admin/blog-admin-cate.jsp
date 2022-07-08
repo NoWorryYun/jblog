@@ -22,7 +22,11 @@
 		
 
 		<div id="content">
-			<c:import url="/WEB-INF/views/includes/admin-menu.jsp"></c:import>
+			<ul id="admin-menu" class="clearfix">
+				<li class="tabbtn"><a href="${pageContext.request.contextPath }/${authUser.id}/admin/basic">기본설정</a></li>
+				<li class="tabbtn selected"><a href="${pageContext.request.contextPath }/${authUser.id}/admin/category">카테고리</a></li>
+				<li class="tabbtn"><a href="${pageContext.request.contextPath }/${authUser.id}/admin/write">글작성</a></li>
+			</ul>
 			<!-- //admin-menu -->
 			
 			<div id="admin-content">
@@ -46,25 +50,6 @@
 		      		</thead>
 		      		<tbody id="cateList">
 		      			<!-- 리스트 영역 -->
-		      			<tr>
-							<td>1</td>
-							<td>자바프로그래밍</td>
-							<td>7</td>
-							<td>자바기초와 객체지향</td>
-						    <td class='text-center'>
-						    	<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-						    </td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>오라클</td>
-							<td>5</td>
-							<td>오라클 설치와 sql문</td>
-						    <td class='text-center'>
-						    	<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-						    </td>
-						</tr>
-						<!-- 리스트 영역 -->
 					</tbody>
 				</table>
       	
@@ -75,7 +60,7 @@
 					</colgroup>
 		      		<tr>
 		      			<td class="t">카테고리명</td>
-		      			<td><input type="text" name="name" value=""></td>
+		      			<td><input type="text" name="cateName" value=""></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="t">설명</td>
@@ -102,32 +87,41 @@
 </body>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	//console.log("jquery로 data만 받는 요청");
+
+	fetchList();
+});
+
 	$("#btnAddCate").on("click", function(){
 		
 		
-		var cateName = $("#admin-cate-add [name = 'name']").val();
+		var cateName = $("#admin-cate-add [name = 'cateName']").val();
 		var description = $("#admin-cate-add [name = 'desc']").val();
 		var id = $("[name = 'authUserId']").val();
 		
 		var categoryVo = {
-				id : id
-				cateName : cateName
+				id : id,
+				cateName : cateName,
 				description : description
 		}
 		
 		$.ajax({
 
-			url : "${pageContext.request.contextPath }/"id"/admin.basic/updateCate",
+			url : "${pageContext.request.contextPath }/admin/basic/updateCate",
 			type : "post",
 			contentType : "application/json",
 			data : JSON.stringify(categoryVo),
 
 			dataType : "json",
-			success : function(result) {
+			success : function(state) {
 				/*성공시 처리해야될 코드 작성*/
-				if(result =="success"){
-					
-				}
+				render(categoryVo, "down");
+				
+				 $("#admin-cate-add [name = 'cateName']").val("");
+				 $("#admin-cate-add [name = 'desc']").val("");
+				
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
@@ -135,7 +129,68 @@
 		});
 	})
 	
+	//리스트 요청
+	function fetchList() {
+		
+		var id = $("[name = 'authUserId']").val();
+		
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath }/request/cateList",
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(id),
 
+			dataType : "json",
+			success : function(cList) {
+				
+				console.log(cList);
+				//화면에 data + html을 그린다.
+				
+				for (var i = 0; i < cList.length; i++) {
+					render(cList[i], "up"); //vo --> 화면에 그린다
+				}
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+
+		});
+	};
+	
+	//리스트그리기
+	function render(categoryVo, opt) {
+
+		console.log("render()");
+	   
+		var str = "";
+
+		str += '<tr id="cateListNo'+ categoryVo.cateNo +'">';
+		str += '<td>' + categoryVo.cateNo + '</td>';
+		str += '<td>' + categoryVo.cateName + '</td>';
+		str += '<td>' + categoryVo.count + '</td>';
+		str += '<td>' + categoryVo.description + '</td>';
+		str += "<td class='text-center'>";
+		str += '<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">';
+		str += " </td>";
+		str += "</tr>";
+
+		if (opt == "down") {
+			$("#cateList").append(str);
+
+		} else if (opt = "up") {
+			$("#cateList").prepend(str);
+		} else {
+			console.log("opt오류");
+		}
+
+	};
+
+	//삭제버튼
+	$("#admin-cate-list").on("click", ".btnCateDel", function(){
+		var cateNo = $("#cateListNo" + categoryVo.cateNo);
+	})
 </script>
 
 

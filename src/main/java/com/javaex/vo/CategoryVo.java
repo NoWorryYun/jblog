@@ -8,6 +8,7 @@ public class CategoryVo {
 	private String cateName;
 	private String description;
 	private String regDate;
+	private int count;
 	
 	//생성자
 	public CategoryVo() {
@@ -23,7 +24,17 @@ public class CategoryVo {
 		this.regDate = regDate;
 	}
 
+	public CategoryVo(String cateNo, String id, String cateName, String description, String regDate, int count) {
+		super();
+		this.cateNo = cateNo;
+		this.id = id;
+		this.cateName = cateName;
+		this.description = description;
+		this.regDate = regDate;
+		this.count = count;
+	}
 	//GS
+
 
 	public String getCateNo() {
 		return cateNo;
@@ -66,6 +77,14 @@ public class CategoryVo {
 	}
 
 	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	//일반
 	@Override
 	public String toString() {

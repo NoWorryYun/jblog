@@ -34,4 +34,10 @@ public class BlogDao {
 		return sqlsession.update("blog.blogImg", blogVo);
 	}
 	
+	//logoFile 받기
+	public String onlyLogoFile(String id) {
+		
+		return sqlsession.selectOne("blog.onlyLogoFile", id);
+	}
+	
 }

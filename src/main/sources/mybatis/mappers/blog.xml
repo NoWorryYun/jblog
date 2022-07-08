@@ -43,6 +43,14 @@
 		]]>
 		</select>
 		
+	<!-- 로고파일 꺼내오기 -->
+		<select id="onlyLogoFile" parameterType="String" resultType="String">
+			<![CDATA[
+				select logoFile
+				from blog
+				where id = #{id}
+			]]>		
+		</select>
 	<!-- 블로그 타이틀 업로드 -->
 	<update id="blogImg" parameterType="BlogVo">
 		<![CDATA[

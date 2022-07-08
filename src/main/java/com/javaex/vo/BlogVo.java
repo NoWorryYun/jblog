@@ -11,7 +11,7 @@ public class BlogVo {
 	private String postContent;
 	private String regDate;
 	private String userName;
-
+	private int count;
 	// 생성자
 	public BlogVo() {
 		super();
@@ -53,6 +53,20 @@ public class BlogVo {
 		this.postContent = postContent;
 		this.regDate = regDate;
 		this.userName = userName;
+	}
+
+	public BlogVo(String id, String blogTitle, String logoFile, String cateName, String postTitle, String postContent,
+			String regDate, String userName, int count) {
+		super();
+		this.id = id;
+		this.blogTitle = blogTitle;
+		this.logoFile = logoFile;
+		this.cateName = cateName;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.regDate = regDate;
+		this.userName = userName;
+		this.count = count;
 	}
 
 	// GS
@@ -118,6 +132,14 @@ public class BlogVo {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	// 일반
