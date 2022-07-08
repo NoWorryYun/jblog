@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -7,6 +8,8 @@
 <meta charset="UTF-8">
 <title>JBlog</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+
 
 
 </head>
@@ -15,14 +18,11 @@
 	<div id="wrap">
 		
 		<!-- 개인블로그 해더 -->
-
+		<c:import url="/WEB-INF/views/includes/blog-header.jsp"></c:import>
+		
 
 		<div id="content">
-			<ul id="admin-menu" class="clearfix">
-				<li class="tabbtn selected"><a href="">기본설정</a></li>
-				<li class="tabbtn"><a href="">카테고리</a></li>
-				<li class="tabbtn"><a href="">글작성</a></li>
-			</ul>
+			<c:import url="/WEB-INF/views/includes/admin-menu.jsp"></c:import>
 			<!-- //admin-menu -->
 			
 			<div id="admin-content">
@@ -92,7 +92,7 @@
 		</div>	
 		<!-- //content -->
 		
-		
+		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"></c:import>
 		<!-- 개인블로그 푸터 -->
 		
 	

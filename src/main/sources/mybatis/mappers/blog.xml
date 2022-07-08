@@ -43,5 +43,14 @@
 		]]>
 		</select>
 		
+	<!-- 블로그 타이틀 업로드 -->
+	<update id="blogImg" parameterType="BlogVo">
+		<![CDATA[
+			update blog
+			set  blogTitle = #{blogTitle}	
+				,logoFile = #{logoFile}
+			where id = #{id}
+		]]>
+	</update>
 		
 </mapper>

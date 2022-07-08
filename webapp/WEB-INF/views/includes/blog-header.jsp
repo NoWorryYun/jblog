@@ -6,7 +6,7 @@
 			<ul class="clearfix">
 				<!-- 자신의 블로그일때만 관리 메뉴가 보인다. -->
 				<c:if test="${authUser.id == bMap.blogTitle.id}">
-				<li><a class="btn_s" href="">내블로그 관리</a></li>
+				<li><a class="btn_s" href="${pageContext.request.contextPath}/${authUser.id}/admin/basic">내블로그 관리</a></li>
 				</c:if>
 				<c:choose>
 				<c:when test="${sessionScope.authUser != null}">

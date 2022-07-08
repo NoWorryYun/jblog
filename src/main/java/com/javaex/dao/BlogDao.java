@@ -28,4 +28,12 @@ public class BlogDao {
 		return sqlsession.selectOne("blog.blogTitle", id);
 	}
 	
+	//blogLogo 업데이트
+	public int blogImg(BlogVo blogVo) {
+	
+		System.out.println("dao" + blogVo);
+		
+		return sqlsession.update("blog.blogImg", blogVo);
+	}
+	
 }

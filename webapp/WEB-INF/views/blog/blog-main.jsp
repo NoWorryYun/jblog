@@ -21,11 +21,15 @@
 			<div id="profilecate_area">
 				<div id="profile">
 					
-					<!-- 기본이미지 -->
+					<!-- 사용자 업로드 이미지 -->
+					<c:choose>
+					<c:when test="${bMap.blogTitle.logoFile != null}">
+					<img id="proImg" src="${pageContext.request.contextPath}/upload/${bMap.blogTitle.logoFile}">
+					</c:when>
+					<c:otherwise>
 					<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
-					
-					<!-- 사용자업로드 이미지 -->
-					<%-- <img id="proImg" src=""> --%>
+					</c:otherwise>
+					</c:choose>
 					
 					<div id="nick">${bMap.blogTitle.userName}(${bMap.blogTitle.id})님</div>
 				</div>
