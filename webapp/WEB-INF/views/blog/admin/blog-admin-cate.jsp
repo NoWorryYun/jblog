@@ -117,7 +117,9 @@ $(document).ready(function() {
 			dataType : "json",
 			success : function(state) {
 				/*성공시 처리해야될 코드 작성*/
-				render(categoryVo, "down");
+				$("#cateList").empty();
+			 	fetchList();
+				//render(categoryVo, "up");
 				
 				 $("#admin-cate-add [name = 'cateName']").val("");
 				 $("#admin-cate-add [name = 'desc']").val("");
@@ -167,14 +169,14 @@ $(document).ready(function() {
 		var str = "";
 
 		str += '<tr id="cateListNo'+ categoryVo.cateNo +'">';
-		str += '<td>' + categoryVo.cateNo + '</td>';
+		str += '<td>' + categoryVo.rn + '</td>';
 		str += '<td>' + categoryVo.cateName + '</td>';
 		str += '<td>' + categoryVo.count + '</td>';
 		str += '<td>' + categoryVo.description + '</td>';
 		str += "<td class='text-center'>";
-		str += '<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">';
-		str += " </td>";
-		str += "</tr>";
+		str += '<img class="btnCateDel" data-no="'+ categoryVo.cateNo +'" src="${pageContext.request.contextPath}/assets/images/delete.jpg">';
+		str += " </td>"
+		str += " </tr>"
 
 		if (opt == "down") {
 			$("#cateList").append(str);
@@ -188,8 +190,42 @@ $(document).ready(function() {
 	};
 
 	//삭제버튼
-	$("#admin-cate-list").on("click", ".btnCateDel", function(){
-		var cateNo = $("#cateListNo" + categoryVo.cateNo);
+	$("#cateList").on("click", ".btnCateDel", function(){
+		var $this = $(this);
+		console.log($this);
+		var cateNo = $this.data("no");
+		var id = $("[name = 'authUserId']").val();
+		console.log(cateNo);
+		console.log(id);
+		
+		var categoryVo = {
+				cateNo : cateNo,
+				id : id
+		}
+		
+		$.ajax({
+
+			url : "${pageContext.request.contextPath }/remove/category",
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(categoryVo),
+
+			dataType : "json",
+			success : function(state) {
+				/*성공시 처리해야될 코드 작성*/
+				console.log(state);
+
+				//성공
+				if (state == "success") {
+					$("#admin-cate-list #cateListNo" + cateNo).remove();
+				}
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		
 	})
 </script>
 

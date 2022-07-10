@@ -13,16 +13,29 @@
 
 	<select id="cateList" parameterType="String" resultType="CategoryVo">
 		<![CDATA[
-			select  c.cateNo cateNo, 
-			        c.id id,
-			        c.cateName cateName,
-			        c.description description,
-			        c.regDate regDate,
-			        count(p.cateNo) count
-			from category c, post p
-			where c.cateNo = p.cateNo(+)
-			and id=#{id}	
-			group by c.cateNo, c.id, c.cateName, c.description, c.regDate
+			select  rn,
+			        cateNo,
+			        cateName,
+			        description,
+			        regDate,
+			        count
+			from (  select  rownum rn,
+				  	        cateNo,
+				  	        cateName,
+				  	        description,
+				  	        regDate,
+				  	        count
+			        from( select c.cateNo cateNo,
+			                     c.cateName cateName,
+			                     c.description description,
+			                     c.regDate regDate,
+			                     count(p.cateNo) count
+			              from category c, post p
+			              where c.cateNo = p.cateNo(+)
+			              and id='ggg'
+			              group by c.cateNo, c.id, c.cateName, c.description, c.regDate
+			              order by cateNo asc)
+			     )
 		]]>
 	</select>
 
@@ -46,4 +59,12 @@
 			values(seq_category_no.nextval, #{id}, #{cateName}, #{description}, sysdate)
 		]]>
 	</insert>
+	
+	<delete id="removeCategory" parameterType="CategoryVo">
+		<![CDATA[
+			delete from category
+			where id = #{id}
+			and cateNo = #{cateNo}
+		]]>
+	</delete>
 </mapper>

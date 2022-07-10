@@ -32,4 +32,10 @@ public class CategoryDao {
 		
 		return sqlsession.insert("category.addCate", categoryVo);
 	}
+	
+	//category 삭제
+	public int removeCate(CategoryVo categoryVo) {
+		
+		return sqlsession.delete("category.removeCategory", categoryVo);
+	}
 }

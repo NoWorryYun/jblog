@@ -39,6 +39,24 @@ public class CateController {
 		}
 	}
 	
+	//블로그 카테고리 삭제
+	@ResponseBody
+	@RequestMapping(value="/remove/category", method = {RequestMethod.GET, RequestMethod.POST})
+	public String removeCategory(@RequestBody CategoryVo categoryVo,
+								 HttpSession httpsession) {
+		UserVo authUser = (UserVo) httpsession.getAttribute("authUser");
+		
+		String authUserId = authUser.getId();
+		String id = categoryVo.getId();
+		if(authUserId != null && authUserId.equals(id)) {
+			String state = cateService.removeCate(categoryVo);
+			return state;
+		} else {
+			return "redirect:./";
+		}
+	}
+	
+	//카테고리 리스트 보내주기
 	@ResponseBody
 	@RequestMapping(value="/request/cateList", method = {RequestMethod.GET, RequestMethod.POST})
 	public List<CategoryVo> cateList(@RequestBody String id) {
