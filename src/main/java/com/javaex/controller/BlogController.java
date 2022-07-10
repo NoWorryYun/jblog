@@ -91,4 +91,23 @@ public class BlogController {
 		}
 	}
 
+	// 블로그 글작성 관리
+	@RequestMapping(value = "/{id}/admin/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
+	public String blogWriteManager(@PathVariable("id") String id, Model model, HttpSession httpsession) {
+
+		BlogVo blogTitle = blogService.blogTitle(id);
+		String blogId = blogTitle.getId();
+		UserVo authUser = (UserVo) httpsession.getAttribute("authUser");
+		String authId = authUser.getId();
+
+		if (authId.equals(blogId)) {
+			Map<String, Object> bMap = blogService.blogAllData(id);
+
+			model.addAttribute("bMap", bMap);
+
+			return "blog/admin/blog-admin-write";
+		} else {
+			return "redirect:../../";
+		}
+	}
 }
