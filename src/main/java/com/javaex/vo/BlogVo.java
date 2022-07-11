@@ -4,6 +4,8 @@ public class BlogVo {
 
 	// 일반
 	private String id;
+	private int cateNo;
+	private int postNo;
 	private String blogTitle;
 	private String logoFile;
 	private String cateName;
@@ -12,11 +14,17 @@ public class BlogVo {
 	private String regDate;
 	private String userName;
 	private int count;
+
 	// 생성자
 	public BlogVo() {
 		super();
 	}
 
+	public BlogVo(String id) {
+		super();
+		this.id = id;
+	}
+	
 	public BlogVo(String id, String logoFile) {
 		super();
 		this.id = id;
@@ -28,6 +36,13 @@ public class BlogVo {
 		this.id = id;
 		this.blogTitle = blogTitle;
 		this.logoFile = logoFile;
+	}
+
+	public BlogVo(String id, int cateNo, int postNo) {
+		super();
+		this.id = id;
+		this.cateNo = cateNo;
+		this.postNo = postNo;
 	}
 
 	public BlogVo(String id, String blogTitle, String logoFile, String cateName, String postTitle, String postContent,
@@ -142,11 +157,28 @@ public class BlogVo {
 		this.count = count;
 	}
 
+	public int getCateNo() {
+		return cateNo;
+	}
+
+	public void setCateNo(int cateNo) {
+		this.cateNo = cateNo;
+	}
+
+	public int getPostNo() {
+		return postNo;
+	}
+
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
+	}
+
 	// 일반
 	@Override
 	public String toString() {
-		return "BlogVo [id=" + id + ", blogTitle=" + blogTitle + ", logoFile=" + logoFile + ", cateName=" + cateName
-				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + "]";
+		return "BlogVo [id=" + id + ", blogNo=" + cateNo + ", postNo=" + postNo + ", blogTitle=" + blogTitle
+				+ ", logoFile=" + logoFile + ", cateName=" + cateName + ", postTitle=" + postTitle + ", postContent="
+				+ postContent + ", regDate=" + regDate + ", userName=" + userName + ", count=" + count + "]";
 	}
 
 }

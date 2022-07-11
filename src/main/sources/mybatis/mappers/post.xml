@@ -11,6 +11,81 @@
 		<result column="regDate" property="regDate" />
 	</resultMap>
 
+	<!-- post리스트 -->
+	<select id="postList" parameterType="int" resultType="PostVo">
+		<![CDATA[
+			select  rn,
+			        cateNo,
+                    postNo,
+                    postContent,
+                    postTitle,
+                    regDate
+			from (  select  rownum rn,
+                            cateNo,
+                            postNo,
+                            postContent,
+                            postTitle,
+                            regDate
+			        from( select c.cateNo cateNo,
+                                 p.postNo postNo,
+                                 p.postContent postContent,
+                                 p.postTitle postTitle,
+                                 p.regDate regDate
+			              from category c, post p
+			              where c.cateNo = p.cateNo(+)
+                          and c.cateNo = #{cateNo}
+			              order by cateNo asc, postNo desc)
+                          )
+		]]>
+	</select>
+	
+		<select id="postRead" parameterType="int" resultType="PostVo">
+		<![CDATA[
+			select  rn,
+					id,
+			        cateNo,
+                    postNo,
+                    postContent,
+                    postTitle,
+                    regDate
+			from (  select  rownum rn,
+                            id,
+                            cateNo,
+                            postNo,
+                            postContent,
+                            postTitle,
+                            regDate
+			        from( select c.id,
+			        			 c.cateNo cateNo,
+                                 p.postNo postNo,
+                                 p.postContent postContent,
+                                 p.postTitle postTitle,
+                                 p.regDate regDate
+			              from category c, post p
+			              where c.cateNo = p.cateNo(+)
+                          and p.postNo = #{postNo}
+			              order by cateNo asc, postNo desc)
+                          )
+		]]>
+	</select>
+
+	<!-- 최신 카테고리 -->
+	<select id="maxCateNo" resultType="int">
+		<![CDATA[
+			select max(cateNo)
+	        from post
+		]]>
+	</select>
+
+	<!-- 최신 포스트 -->
+	<select id="maxPostNo" parameterType="int" resultType="int">
+		<![CDATA[
+			select max(postNo)
+	        from post
+	        where cateNo=#{cateNo}
+		]]>
+	</select>
+
 	<!-- 글등록 -->
 	<insert id="write" parameterType="PostVo">
 		<![CDATA[

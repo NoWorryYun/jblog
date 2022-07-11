@@ -14,18 +14,21 @@
 	<select id="cateList" parameterType="String" resultType="CategoryVo">
 		<![CDATA[
 			select  rn,
+					id,
 			        cateNo,
 			        cateName,
 			        description,
 			        regDate,
 			        count
 			from (  select  rownum rn,
+							id,
 				  	        cateNo,
 				  	        cateName,
 				  	        description,
 				  	        regDate,
 				  	        count
 			        from( select c.cateNo cateNo,
+			        			 c.id id,
 			                     c.cateName cateName,
 			                     c.description description,
 			                     c.regDate regDate,

@@ -3,6 +3,7 @@ package com.javaex.vo;
 public class PostVo {
 
 	// 필드
+	private String id;
 	private int postNo;
 	private int cateNo;
 	private String postTitle;
@@ -16,6 +17,16 @@ public class PostVo {
 
 	public PostVo(int postNo, int cateNo, String postTitle, String postContent, String regDate) {
 		super();
+		this.postNo = postNo;
+		this.cateNo = cateNo;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.regDate = regDate;
+	}
+
+	public PostVo(String id, int postNo, int cateNo, String postTitle, String postContent, String regDate) {
+		super();
+		this.id = id;
 		this.postNo = postNo;
 		this.cateNo = cateNo;
 		this.postTitle = postTitle;
@@ -62,6 +73,14 @@ public class PostVo {
 
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	// 일반

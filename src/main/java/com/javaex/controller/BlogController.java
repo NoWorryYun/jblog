@@ -1,5 +1,6 @@
 package com.javaex.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BlogService;
+import com.javaex.service.PostService;
 import com.javaex.vo.BlogVo;
+import com.javaex.vo.PostVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -23,14 +26,27 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 
+	@Autowired
+	private PostService postService;
 	// 블로그 메인
-	@RequestMapping(value = "/{id}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String blogMain(@PathVariable("id") String id, Model model) {
-
+	@RequestMapping(value = {"/{id:(?!assets|upload).*}", "/{id:(?!assets|upload).*}/{cateNo}", "/{id:(?!assets|upload).*}/{cateNo}/{postNo}"}, method = { RequestMethod.GET, RequestMethod.POST })
+	public String blogMain( @PathVariable("id") String id,
+							@PathVariable(value="cateNo", required = false) Integer cateNo,
+							@PathVariable(value="postNo", required = false) Integer postNo,
+							Model model) {
+		System.out.println("BlogController  =  main");
 		Map<String, Object> bMap = blogService.blogAllData(id);
 
 		model.addAttribute("bMap", bMap);
 
+		List<PostVo> postList = postService.postList(cateNo);
+		
+		model.addAttribute("postList", postList);
+		
+		PostVo postRead = postService.postRead(cateNo, postNo);
+		
+		model.addAttribute("postRead", postRead);
+		
 		return "blog/blog-main";
 	}
 
@@ -79,7 +95,6 @@ public class BlogController {
 		String blogId = blogTitle.getId();
 		UserVo authUser = (UserVo) httpsession.getAttribute("authUser");
 		String authId = authUser.getId();
-
 		if (authId.equals(blogId)) {
 			Map<String, Object> bMap = blogService.blogAllData(id);
 
@@ -99,7 +114,6 @@ public class BlogController {
 		String blogId = blogTitle.getId();
 		UserVo authUser = (UserVo) httpsession.getAttribute("authUser");
 		String authId = authUser.getId();
-
 		if (authId.equals(blogId)) {
 			Map<String, Object> bMap = blogService.blogAllData(id);
 

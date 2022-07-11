@@ -26,6 +26,7 @@ public class BlogService {
 	
 	@Autowired
 	private CategoryDao categoryDao;
+	
 	/*
 	//블로그 전체정보 (보류)
 	public List<BlogVo> blogData(String id) {
@@ -47,6 +48,10 @@ public class BlogService {
 	
 	//블로그 정보받기(메인용)
 	public Map<String, Object> blogAllData(String id) {
+		
+		System.out.println("blogService > blogAlldata");
+		
+		System.out.println(id);
 		
 		BlogVo blogTitle = blogDao.blogTitle(id);
 		List<CategoryVo> cateList = categoryDao.cateList(id);
