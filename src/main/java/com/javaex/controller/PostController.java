@@ -20,7 +20,10 @@ public class PostController {
 	public String write(@PathVariable("id") String id, @ModelAttribute PostVo postVo) {
 		postService.write(postVo);
 		
+		
+		
 		return "redirect:../writeForm";
 		
 	}
 }
+
