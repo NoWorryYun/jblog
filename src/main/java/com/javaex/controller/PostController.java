@@ -22,6 +22,7 @@ public class PostController {
 		
 		
 		
+		
 		return "redirect:../writeForm";
 		
 	}
